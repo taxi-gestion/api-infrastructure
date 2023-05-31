@@ -35,15 +35,6 @@ variable "private_subnets_ids" {
   description = "The ids of the project vpc private subnets where the api is hosted"
 }
 
-# TODO We put the service in the public subnet to be able to pull on ECR,
-# but maybe it is a bad practice and we should put it on the private subnets and toggle the route association to access the igw temporarily
-# Public IP is the easiest way to be able to pull on ECR: https://stackoverflow.com/questions/61265108/aws-ecs-fargate-resourceinitializationerror-unable-to-pull-secrets-or-registry
-variable "public_subnets_ids" {
-  type        = list(string)
-  nullable    = false
-  description = "The ids of the project vpc public subnets where the service is hosted, "
-}
-
 variable "vpc_id" {
   type        = string
   nullable    = false
