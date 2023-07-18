@@ -25,7 +25,9 @@ resource "aws_ecs_task_definition" "task_definition" {
       image : var.target_image,
       environment : [
         { "name" : "PORT", "value" : "80" },
-        { "name" : "DATABASE_URL", "value" : var.db_connexion_string }
+        { "name" : "DATABASE_URL", "value" : var.db_connexion_string },
+        { "name" : "API_KEY_OPENAI", "value" : var.third_party_api_keys.openai.value },
+        { "name" : "API_KEY_GOOGLE_MAPS", "value" : var.third_party_api_keys.googlemaps.value }
       ],
       portMappings : [
         {

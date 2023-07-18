@@ -29,6 +29,16 @@ variable "db_connexion_string" {
   description = "A connexion string to the database associated with this api"
 }
 
+variable "third_party_api_keys" {
+  type = map(object({
+    key   = string
+    value = string
+  }))
+  nullable    = false
+  description = "Key-value pairs of third-party API keys"
+  default     = {}
+}
+
 variable "private_subnets_ids" {
   type        = list(string)
   nullable    = false
