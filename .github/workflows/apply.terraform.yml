@@ -49,15 +49,14 @@ jobs:
         if: github.ref == 'refs/heads/main' && inputs.force-replace == ''
         run: |
           echo "tfe_token = \"${{ secrets.TF_API_TOKEN }}\"" >> terraform.auto.tfvars
+          echo "third_party_api_keys = $(jq -n --arg openai "${{ secrets.API_KEY_OPENAI }}" --arg googlemaps "${{ secrets.API_KEY_GOOGLE_MAPS }}" '{ openai: { key: "API_KEY_OPENAI", value: $openai }, googlemaps: { key: "API_KEY_GOOGLE_MAPS", value: $googlemaps }}')" >> terraform.auto.tfvars
           terraform apply -auto-approve -input=false
 
       - name: Terraform Apply with force replace ${{ inputs.force-replace }}
         if: github.ref == 'refs/heads/main' && inputs.force-replace != ''
         run: |
           echo "tfe_token = \"${{ secrets.TF_API_TOKEN }}\"" >> terraform.auto.tfvars
-          echo "third_party_api_keys = <<EOF" >> terraform.auto.tfvars
-          echo "$(jq -n --arg openai "${{ secrets.API_KEY_OPENAI }}" --arg googlemaps "${{ secrets.API_KEY_GOOGLE_MAPS }}" '{ openai: { key: "API_KEY_OPENAI", value: $openai }, googlemaps: { key: "API_KEY_GOOGLE_MAPS", value: $googlemaps }}')" >> terraform.auto.tfvars
-          echo "EOF" >> terraform.auto.tfvars
+          echo "third_party_api_keys = $(jq -n --arg openai "${{ secrets.API_KEY_OPENAI }}" --arg googlemaps "${{ secrets.API_KEY_GOOGLE_MAPS }}" '{ openai: { key: "API_KEY_OPENAI", value: $openai }, googlemaps: { key: "API_KEY_GOOGLE_MAPS", value: $googlemaps }}')" >> terraform.auto.tfvars
           terraform apply -auto-approve -input=false -replace=${{ inputs.force-replace }}
 
   notify-on-error:
