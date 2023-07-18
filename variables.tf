@@ -36,7 +36,6 @@ variable "third_party_api_keys" {
   }))
   nullable    = false
   description = "Key-value pairs of third-party API keys"
-  default     = {}
 }
 
 variable "private_subnets_ids" {
