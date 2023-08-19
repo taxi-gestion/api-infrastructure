@@ -27,7 +27,11 @@ resource "aws_ecs_task_definition" "task_definition" {
         { "name" : "PORT", "value" : "80" },
         { "name" : "DATABASE_URL", "value" : var.db_connexion_string },
         { "name" : "API_KEY_OPENAI", "value" : var.third_party_api_keys.openai.value },
-        { "name" : "API_KEY_GOOGLE_MAPS", "value" : var.third_party_api_keys.googlemaps.value }
+        { "name" : "API_KEY_GOOGLE_MAPS", "value" : var.third_party_api_keys.googlemaps.value },
+        { "name" : "AWS_ACCESS_KEY_ID", "value" : var.aws.access_key_id.value },
+        { "name" : "AWS_SECRET_ACCESS_KEY", "value" : var.aws.secret_access_key.value },
+        { "name" : "AWS_REGION", "value" : var.aws.region.value },
+        { "name" : "AWS_COGNITO_USER_POOL_ID", "value" : var.aws.cognito_user_pool_id.value }
       ],
       portMappings : [
         {

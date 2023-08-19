@@ -38,6 +38,15 @@ variable "third_party_api_keys" {
   description = "Key-value pairs of third-party API keys"
 }
 
+variable "aws" {
+  type = map(object({
+    key   = string
+    value = string
+  }))
+  nullable    = false
+  description = "Key-value pairs of aws environment variables set within the container"
+}
+
 variable "private_subnets_ids" {
   type        = list(string)
   nullable    = false
